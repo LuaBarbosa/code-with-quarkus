@@ -1,7 +1,7 @@
 package org.code.resource;
 
 import org.code.entity.UserRegistration;
-import org.h2.engine.User;
+import org.code.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -20,37 +20,6 @@ public class UserResource {
         return UserRegistration.listAll();
     }
 
-    @GET
-    @Path("/{id}")
-    public UserRegistration listUser(Long id){
-        return UserRegistration.findById(id);
-    }
 
-    @POST
-    @Transactional
-    public Response createUser(UserRegistration user){
-        user.persist();
-        return Response.created(URI.create("/user/")).build();
-    }
-    @PUT
-    @Path("/{id}")
-    @Transactional
-    public UserRegistration update(Long id, UserRegistration user) {
-        UserRegistration entity = UserRegistration.findById(id);
-        if(entity == null){
-            throw new NotFoundException();
-        }
-        return entity;
-    }
 
-    @DELETE
-    @Path("/{id}")
-    public void delete(Long id ){
-
-        UserRegistration entity = UserRegistration.findById(id);
-        if(entity == null){
-            throw new NotFoundException();
-        }
-        entity.delete();
-    }
 }
