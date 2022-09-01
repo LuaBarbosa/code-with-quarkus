@@ -5,7 +5,6 @@ import org.code.repository.UserRepository;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.ws.rs.core.Response;
 import java.util.List;
 
 @ApplicationScoped
@@ -22,7 +21,13 @@ public class UserService {
         userRepository.persist(user);
     };
 
-    // UserRepository update(Long id);
-    // Response delete(Long id);
+    public UserEntity listUser(Long id) {
+      return userRepository.findById(id);
+
+    }
+    public boolean delete(Long id){
+        return userRepository.deleteById(id);
+
+    }
 
 }

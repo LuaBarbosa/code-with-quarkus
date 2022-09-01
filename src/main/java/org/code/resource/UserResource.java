@@ -24,13 +24,19 @@ public class UserResource {
     @GET
     @Path("/{id}")
     public UserEntity listUser(@PathParam("id") Long id){
-        return UserEntity.findById(id);
+        return service.listUser(id);
     }
     @POST
     @Transactional
     public void newUser(UserEntity user){
         service.newUser(user);
+    }
 
+    @DELETE
+    @Transactional
+    @Path("/{id}")
+    public boolean delete(@PathParam("id") Long id){
+        return service.delete(id);
     }
 
 
