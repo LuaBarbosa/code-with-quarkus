@@ -2,9 +2,13 @@ package org.code.service;
 
 import org.code.entity.UserEntity;
 import org.code.repository.UserRepository;
+import org.h2.engine.User;
 
+import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @ApplicationScoped
@@ -27,7 +31,20 @@ public class UserService {
     }
     public boolean delete(Long id){
         return userRepository.deleteById(id);
+    }
 
+    public UserEntity update(Long id, UserEntity user) {
+        UserEntity userId = UserEntity.findById(id);
+        if (userId == null) {
+            throw new WebApplicationException("User with id of " + id + " does not exist.",
+                    Response.Status.NOT_FOUND);
+        }
+        userId.setId(userId.getId());
+        userId.setName(userId.getName());
+        userId.setCity(userId.getCity());
+        userId.setAge(userId.getAge());
+
+        return userId;
     }
 
 }

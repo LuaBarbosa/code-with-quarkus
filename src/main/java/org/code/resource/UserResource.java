@@ -39,6 +39,11 @@ public class UserResource {
         return service.delete(id);
     }
 
-
+    @PUT
+    @Transactional
+    @Path("/{id}")
+    public UserEntity update(@PathParam("id") Long id, UserEntity user){
+        return  service.update(id, user);
+    }
 
 }
