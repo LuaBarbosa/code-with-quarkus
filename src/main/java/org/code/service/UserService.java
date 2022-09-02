@@ -6,6 +6,7 @@ import org.h2.engine.User;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -36,8 +37,7 @@ public class UserService {
     public UserEntity update(Long id, UserEntity user){
         UserEntity userId = UserEntity.findById(id);
         if (userId == null) {
-            throw new WebApplicationException("User with id of " + id + " does not exist.",
-                    Response.Status.NOT_FOUND);
+            throw new NotFoundException();
         }
         userId.setId(userId.getId());
         userId.setName(userId.getName());

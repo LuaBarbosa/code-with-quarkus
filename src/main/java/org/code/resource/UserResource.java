@@ -44,7 +44,7 @@ public class UserResource {
     @Path("/{id}")
     public Response update(@PathParam("id") Long id, UserEntity user){
        service.update(id, user);
-       return Response.ok(user).build();
+       return Response.ok().build();
     }
 
 }
