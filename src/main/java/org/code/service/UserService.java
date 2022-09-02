@@ -4,18 +4,18 @@ import org.code.entity.UserEntity;
 import org.code.repository.UserRepository;
 import org.h2.engine.User;
 
-import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 public class UserService {
 
     @Inject
-    UserRepository userRepository = null;
+    UserRepository userRepository;
     
     public List<UserEntity> listAll(){
         return userRepository.findAll().list();
@@ -33,7 +33,7 @@ public class UserService {
         return userRepository.deleteById(id);
     }
 
-    public UserEntity update(Long id, UserEntity user) {
+    public UserEntity update(Long id, UserEntity user){
         UserEntity userId = UserEntity.findById(id);
         if (userId == null) {
             throw new WebApplicationException("User with id of " + id + " does not exist.",
@@ -46,5 +46,6 @@ public class UserService {
 
         return userId;
     }
+
 
 }

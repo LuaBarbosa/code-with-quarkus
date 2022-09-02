@@ -42,8 +42,9 @@ public class UserResource {
     @PUT
     @Transactional
     @Path("/{id}")
-    public UserEntity update(@PathParam("id") Long id, UserEntity user){
-        return  service.update(id, user);
+    public Response update(@PathParam("id") Long id, UserEntity user){
+       service.update(id, user);
+       return Response.ok(user).build();
     }
 
 }
